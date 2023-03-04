@@ -1,0 +1,5 @@
+fastapi
+fastapi-users[beanie]
+uvicorn[standard]
+fastapi-mail[httpx]
+python-dotenv
