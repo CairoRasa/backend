@@ -1,14 +1,13 @@
 import dotenv
 dotenv.load_dotenv(verbose=True)
 from db.FoodItem import FoodItem
-import uvicorn, os, routes.manage_items #, logging
+import uvicorn, os, routes.manage_items, routes.orders, routes.manage_orders, routes.items
 from beanie import init_beanie
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from db import User, db
+from db import User, db, Order
 from schemas import UserCreate, UserRead, UserUpdate
 from users import auth_backend, fastapi_users
-
 
 origins = [
     os.getenv("FRONTEND_URL")
@@ -52,6 +51,10 @@ app.include_router(
 )
 
 app.include_router(routes.manage_items.router)
+app.include_router(routes.orders.router)
+app.include_router(routes.manage_orders.router)
+app.include_router(routes.items.router)
+
 
 # @app.get("/authenticated-route")
 # async def authenticated_route(user: User = Depends(current_active_user)):
@@ -63,10 +66,12 @@ async def on_startup():
     await init_beanie(
         database=db,
         document_models=[
-            User, # type: ignore
-            FoodItem
+            User,  # type: ignore
+            FoodItem,
+            Order.Order
         ],
     )
-    
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", log_level="info")

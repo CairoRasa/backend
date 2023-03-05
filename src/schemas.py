@@ -27,15 +27,6 @@ class FoodItem(BaseModel):
     
 class OrderRequest(BaseModel):
     # each order will have a list of items
-    items: typing.List[FoodItem]
-    # and a total price
-    total_price: float
-    # the user who made the order
-    user_id: typing.Text
-    # and the status of the order
-    # status: typing.Literal[
-    #     "pending", "accepted", "rejected", "on-the-way", "delivered"
-    # ] = "pending"
-    
+    item_ids: typing.List[typing.Text]
     location: Location
     

@@ -1,4 +1,6 @@
-import os, typing
+import os
+import typing
+
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
 from pydantic import EmailStr
 
