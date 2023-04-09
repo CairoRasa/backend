@@ -6,7 +6,7 @@ router = APIRouter(prefix="/items", tags=["items"])
 
 @router.get("/")
 async def get_items():
-    res = FoodItem.find({})
+    res = FoodItem.find_all()
     item_list = await res.to_list()
     for item in item_list:
         delattr(item, "description")

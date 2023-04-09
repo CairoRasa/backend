@@ -9,14 +9,11 @@ from db import User, db, Order
 from schemas import UserCreate, UserRead, UserUpdate
 from users import auth_backend, fastapi_users
 
-origins = [
-    os.getenv("FRONTEND_URL")
-]
 
 app = FastAPI(title="CairoRasa API", version="0.1.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
